@@ -1,6 +1,6 @@
 {
     "version" : 2,
-    "name" : "Central Enem",
+    "name" : "CentralEnem",
     "builds" : [
         {
             "src" : "./index.js",
