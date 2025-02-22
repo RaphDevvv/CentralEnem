@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FaUserCircle, FaTrophy, FaFire } from "react-icons/fa";
 import victoryEffect from '../assets/victory.mp3';
-import setStreak from '../utils/setstreak';
+import setStreak from '../utils/setStreak';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
