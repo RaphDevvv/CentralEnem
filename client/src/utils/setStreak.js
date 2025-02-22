@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux"
 import summaryApi from "../common/summaryApi"
 import { setUserDetails } from "../store/userslice"
 import Axios from "./axios"
