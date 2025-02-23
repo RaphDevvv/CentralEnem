@@ -78,13 +78,13 @@ const Main = () => {
         <div className='md:hidden fixed bottom-0 w-full  border-t-2 border-gray-300'>
           <div className='flex justify-around py-3 bg-white'>
             <div 
-            onClick={()=>navigate("/home")}
+            onClick={()=>navigate("/main/home")}
             className='flex flex-col items-center hover:bg-gray-200 p-2 rounded cursor-pointer'>
               <FaHome size={26} className='text-blue-500 hover:text-blue-700' />
               <p className='text-sm'>Home</p>
             </div>
             <div 
-            onClick={()=>navigate("/simulados")}
+            onClick={()=>navigate("/main/simulados")}
             className='flex flex-col items-center hover:bg-gray-200 p-2 rounded cursor-pointer'>
               <MdOutlineNoteAlt size={26} className='text-yellow-500 hover:text-yellow-700' />
               <p className='text-sm'>Simulados</p>
@@ -103,13 +103,13 @@ const Main = () => {
           {
             moreOpt && <div className='absolute top-[-5.5rem] bg-white p-2 w-full'>
                             <div 
-                onClick={() => navigate("/ranking")}
+                onClick={() => navigate("/main/ranking")}
                 className='flex flex-row items-center hover:bg-gray-200 p-2 rounded cursor-pointer gap-2'>
                 <FaRankingStar size={20} className='text-red-500 hover:text-red-700' />
                 <p className='text-sm'>Ranking</p>
               </div>
               <div 
-                onClick={() => navigate("/estatisticas")}
+                onClick={() => navigate("/main/estatisticas")}
                 className='flex flex-row items-center hover:bg-gray-200 p-2 rounded cursor-pointer gap-2'>
                 <GoGraph size={20} className='text-purple-500 hover:text-purple-700' />
                 <p className='text-sm'>Estatísticas</p>
