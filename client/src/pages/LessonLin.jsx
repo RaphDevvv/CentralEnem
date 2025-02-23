@@ -90,13 +90,19 @@ const LessonLin = () => {
     }, [currentQIndex, questionArray]);
 
     useEffect(() => {
-        getLinQuestions()
-    }, [])
+        const timer = setTimeout(() => {
+            getLinQuestions();
+        }, 500); 
+        return () => clearTimeout(timer); 
+    }, []);
+
 
     return (
         <div className='container mx-auto'>
+            { lessonDone && <LessonDone/> } 
+
             {
-                lessonDone ? <LessonDone/> : <div className='px-auto shadow bg-white mx-3 lg:mx-0'>
+                questionArray.length > 0 &&             <div className='px-auto shadow bg-white mx-3 lg:mx-0'>
 
                 <div className='sticky top-24'>
                     <div className="flex justify-center items-center gap-2 bg-white md:p-6 p-6">
