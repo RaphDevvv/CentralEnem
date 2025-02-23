@@ -9,6 +9,7 @@ import Profile from '../pages/Profile';
 import Dev from '../pages/Dev';
 import SendQuestions from '../pages/SendQuestions';
 import LessonLin from '../pages/LessonLin';
+import LessonNat from '../pages/LessonNat';
 import LandingPage from '../pages/LandingPage';
 import LessonHum from '../pages/LessonHum';
 import Desafios from '../pages/Desafios';
@@ -82,6 +83,11 @@ const router = createBrowserRouter([
           {
             path: 'hum',
             element: <LessonHum />
+          },
+
+          {
+            path: 'nat',
+            element: <LessonNat/>
           }
         ]
       }

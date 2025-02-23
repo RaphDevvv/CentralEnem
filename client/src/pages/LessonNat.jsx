@@ -15,7 +15,7 @@ import wrongEffect from '../assets/wrong.mp3';
 import { useNavigate } from 'react-router-dom';
 import LessonDone from './LessonDone';
 
-const LessonHum = () => {
+const LessonLin = () => {
     const [questionArray, setQuestionArray] = useState([])
     const [currentQIndex, setCurrentQIndex] = useState(0)
     const [selectedIndex, setSelectedIndex] = useState(null)
@@ -26,10 +26,10 @@ const LessonHum = () => {
     const [lessonDone, setLessonDone] = useState(false)
     const [disableButtons, setDisableButtons] = useState(false)
 
-    const getHumQuestions = async () => {
+    const getNatQuestions = async () => {
         try {
             const res = await Axios({
-                ...summaryApi.get_hum
+                ...summaryApi.get_nat
             })
 
             if (res.data.success) {
@@ -91,20 +91,19 @@ const LessonHum = () => {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            getHumQuestions();
+            getNatQuestions();
         }, 500); 
         return () => clearTimeout(timer); 
     }, []);
-    
+
 
     return (
         <div className='container mx-auto'>
-            {
-                lessonDone && <LessonDone/>
-             } 
-             
+            { lessonDone && <LessonDone/> } 
+
             {
                 questionArray.length > 0 &&  <div className={`px-auto shadow bg-white mx-3 lg:mx-0 ${lessonDone && "hidden"}`}>
+
                 <div className='sticky top-24'>
                     <div className="flex justify-center items-center gap-2 bg-white md:p-6 p-6">
                         <div className="w-[60rem] h-[1rem] bg-gray-200 rounded-lg p-2 relative">
@@ -128,15 +127,15 @@ const LessonHum = () => {
                                 <Divider />
                             </div>
                             <div className='max-w-[50rem] mr-auto'>
- {
-                                    questionArray.length > 0 && parse(
-                                        questionArray[currentQIndex]?.html.replace(
-                                            "<img/>",
-                                            '<img className="w-[30rem]" />'
-                                        )
-                                    )
-                                }
-
+      {
+                                         questionArray.length > 0 && parse(
+                                             questionArray[currentQIndex]?.html.replace(
+                                                 "<img/>",
+                                                 '<img className="w-[30rem]" />'
+                                             )
+                                         )
+                                     }
+     
 
                             </div>
 
@@ -167,7 +166,7 @@ const LessonHum = () => {
                                         </div>
                                         <div
                                             onClick={() => handleSetSIndex(index)}
-                                            className={` max-w-[40rem] w-full md:w-[40rem] mb-2 text-gray-800 p-4 cursor-pointer rounded-lg border-2 shadow transition duration-300 hover:bg-blue-100 border-blue-500 ${index === correctIndex ? "bg-green-200 hover:bg-green-200" : ""} ${disableButtons ? "pointer-events-none" : ""}`}
+                                            className={` max-w-[40rem] md:w-[40rem] w-full mb-2 text-gray-800 p-4 cursor-pointer rounded-lg border-2 shadow transition duration-300 hover:bg-blue-100 border-blue-500 ${index === correctIndex ? "bg-green-200 hover:bg-green-200" : ""} ${disableButtons ? "pointer-events-none" : ""}`}
                                         >
                                             {alt}
                                         </div>
@@ -212,4 +211,4 @@ const LessonHum = () => {
     )
 }
 
-export default LessonHum
+export default LessonLin

@@ -28,6 +28,7 @@ const exams = [
     textColor: 'text-green-500', 
     buttonHover: 'hover:bg-green-600',
     description: 'Biologia, Química e Física para você desafiar seu conhecimento.',
+    onClickPath: "/lesson/nat",
     icon: <MdScience size={50} className="text-white" />
   },
   { 

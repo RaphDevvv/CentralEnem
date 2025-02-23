@@ -129,7 +129,10 @@ const LessonLin = () => {
                             <div className='max-w-[50rem] mr-auto'>
                                 {
                                     questionArray.length > 0 && parse(
-                                        questionArray[currentQIndex]?.html
+                                        questionArray[currentQIndex]?.html.replace(
+                                            "<img/>",
+                                            '<img className="w-[30rem]" />'
+                                        )
                                     )
                                 }
 
