@@ -102,7 +102,7 @@ const LessonLin = () => {
             { lessonDone && <LessonDone/> } 
 
             {
-                questionArray.length > 0 &&             <div className='px-auto shadow bg-white mx-3 lg:mx-0'>
+                questionArray.length > 0 &&  <div className={`px-auto shadow bg-white mx-3 lg:mx-0 ${lessonDone && "hidden"}`}>
 
                 <div className='sticky top-24'>
                     <div className="flex justify-center items-center gap-2 bg-white md:p-6 p-6">
