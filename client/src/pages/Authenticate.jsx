@@ -15,6 +15,7 @@ const Authenticate = () => {
   const user = useSelector(state=>state?.user)
   const navigate = useNavigate()
   const [login, setLogin] = useState(true);
+  const [loading, setLoading] = useState(false)
 
   const [formData, setFormData] = useState({
     name: "",
@@ -35,6 +36,7 @@ const Authenticate = () => {
 
   const handleRegister = async () => {
     try {
+      setLoading(true)
       const res = await Axios({
         ...summaryApi.register,
         data: {
@@ -54,11 +56,14 @@ const Authenticate = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false)
     }
   };
 
   const handleLogin = async () => {
     try {
+      setLoading(true)
       const res = await Axios({
         ...summaryApi.login,
         data: {
@@ -76,6 +81,8 @@ const Authenticate = () => {
       }
     } catch (error) {
       toastError(error)
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -120,8 +127,8 @@ const Authenticate = () => {
                 <input type='password' name='password' value={formData.password} onChange={handleChange} className='py-1 px-2 border border-blue-500 rounded-lg bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-300' />
               </div>
 
-              <button onClick={handleLogin} className='w-full py-3 bg-blue-500 text-white font-semibold hover:bg-blue-600 transition-colors duration-300 cursor-pointer rounded-sm'>
-                Confirmar
+              <button onClick={handleLogin} className={` ${loading && "cursor-not-allowed"} w-full py-3 bg-blue-500 text-white font-semibold hover:bg-blue-600 transition-colors duration-300 cursor-pointer rounded-sm`}>
+                { loading ? "..." : "Confirmar"}
               </button>
             </div>
           ) : (
@@ -146,8 +153,8 @@ const Authenticate = () => {
                 <input name='confirmPassword' value={formData.confirmPassword} onChange={handleChange} className='py-1 px-2 border border-blue-500 rounded-lg bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-300' />
               </div>
 
-              <button onClick={handleRegister} className='w-full py-3 bg-blue-500 text-white font-semibold hover:bg-blue-600 transition-colors duration-300 cursor-pointer rounded-sm'>
-                Confirmar
+              <button onClick={handleRegister} className={`w-full ${loading && "cursor-not-allowed"} py-3 bg-blue-500 text-white font-semibold hover:bg-blue-600 transition-colors duration-300 cursor-pointer rounded-sm`}>
+              { loading ? "..." : "Confirmar"}
               </button>
             </div>
           )}

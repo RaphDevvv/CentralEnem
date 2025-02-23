@@ -89,7 +89,9 @@ const Main = () => {
               <MdOutlineNoteAlt size={26} className='text-yellow-500 hover:text-yellow-700' />
               <p className='text-sm'>Simulados</p>
             </div>
-            <div className='flex flex-col items-center hover:bg-gray-200 p-2 rounded cursor-pointer'>
+            <div 
+            onClick={()=>navigate("/main/desafios")}
+            className='flex flex-col items-center hover:bg-gray-200 p-2 rounded cursor-pointer'>
               <FaTrophy size={26} className='text-green-500 hover:text-green-700' />
               <p className='text-sm'>Desafios</p>
             </div>
@@ -102,7 +104,7 @@ const Main = () => {
           </div>
           {
             moreOpt && <div className='absolute top-[-5.5rem] bg-white p-2 w-full'>
-                            <div 
+                <div 
                 onClick={() => navigate("/main/ranking")}
                 className='flex flex-row items-center hover:bg-gray-200 p-2 rounded cursor-pointer gap-2'>
                 <FaRankingStar size={20} className='text-red-500 hover:text-red-700' />

@@ -110,7 +110,7 @@ const LessonLin = () => {
                     </div>
                 </div>
 
-                <div className=' mx-auto px-6 md:px-8 pb-25 '>
+                <div className=' mx-auto px-6 md:px-16 pb-25 '>
                     <div className='flex items-center justify-center'>
                         <div className='flex flex-col justify-center items-center'>
                             <div className='w-full'>
@@ -120,13 +120,10 @@ const LessonLin = () => {
                                 </div>
                                 <Divider />
                             </div>
-                            <div className='max-w-[50rem] md:px-10 lg:px-0 mr-auto'>
+                            <div className='max-w-[50rem] mr-auto'>
                                 {
                                     questionArray.length > 0 && parse(
-                                        questionArray[currentQIndex]?.html.replace(
-                                            "<img/>",
-                                            '<img className="w-[30rem]" />'
-                                        )
+                                        questionArray[currentQIndex]?.html
                                     )
                                 }
 
@@ -135,7 +132,7 @@ const LessonLin = () => {
                             <p className='mt-4 text-md max-w-[50rem] mr-auto'>{questionArray[currentQIndex]?.comando}</p>
 
                             {/* Loop through the alternatives and render them */}
-                            <div className="mt-4 ">
+                            <div className="mt-4 w-full">
                                 {questionArray.length > 0 && questionArray[currentQIndex]?.alternativas?.map((alt, index) => (
                                     <div key={index} className='flex items-center justify-center gap-1' >
                                         <div>
@@ -159,7 +156,7 @@ const LessonLin = () => {
                                         </div>
                                         <div
                                             onClick={() => handleSetSIndex(index)}
-                                            className={` max-w-[40rem] md:w-[40rem] mb-2 text-gray-800 p-4 cursor-pointer rounded-lg border-2 shadow transition duration-300 hover:bg-blue-100 border-blue-500 ${index === correctIndex ? "bg-green-200 hover:bg-green-200" : ""} ${disableButtons ? "pointer-events-none" : ""}`}
+                                            className={` max-w-[40rem] md:w-[40rem] w-full mb-2 text-gray-800 p-4 cursor-pointer rounded-lg border-2 shadow transition duration-300 hover:bg-blue-100 border-blue-500 ${index === correctIndex ? "bg-green-200 hover:bg-green-200" : ""} ${disableButtons ? "pointer-events-none" : ""}`}
                                         >
                                             {alt}
                                         </div>
