@@ -70,3 +70,23 @@ export const getQuestionsHum = async (req, res) => {
         })
     } 
 }
+
+export const getQuestionsNat = async (req, res) => {
+    try {
+        const find = await questionModel.aggregate([
+            { $match: { prova: "nat" } }, 
+            { $sample: { size: 5 } } 
+        ])
+
+        return res.json({
+            message: "questões",
+            data: find,
+            success: true
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message || error,
+            error: true
+        })
+    } 
+}

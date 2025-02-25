@@ -225,36 +225,30 @@ export const setLastLessonDate = async (req, res) => {
 
 export const setStreakAfterLesson = async (req, res) => {
     try {
-        const userId = req.userId
+        const userId = req.userId;
         const today = new Date();
-        
+        const todayUTC = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
+
         const user = await userModel.findById(userId, { lastLesson: 1, streakNo: 1 });
 
-        
         if (!user?.lastLesson || user?.streakNo === 0) {
             const prev = user?.streakNo || 0;  
-            await userModel.findByIdAndUpdate(userId, { lastLesson: today, streakNo: prev + 1 })
-            return res.json({updatePeriod:true})
+            await userModel.findByIdAndUpdate(userId, { lastLesson: todayUTC, streakNo: prev + 1 });
+            return res.json({ updatePeriod: true });
         }
 
-        const lastLesson = user?.lastLesson;
+        const lastLesson = new Date(user.lastLesson);
 
-        const todayWithoutTime = new Date(today.setHours(0, 0, 0, 0));
-        const lastLessonWithoutTime = new Date(lastLesson.setHours(0, 0, 0, 0));
-
-        if (todayWithoutTime.toDateString() === lastLessonWithoutTime.toDateString()) {
-            await userModel.findByIdAndUpdate(userId, { lastLesson: today})
-         
-            return res.json({ updatePeriod: false
-           });
+        if (todayUTC.toISOString() === lastLesson.toISOString()) {
+            await userModel.findByIdAndUpdate(userId, { lastLesson: todayUTC });
+            return res.json({ updatePeriod: false });
         }
-        
-        const diffInDays = Math.floor(( todayWithoutTime - lastLessonWithoutTime) / (1000 * 60 * 60 * 24));
-        
+
+        const diffInDays = Math.floor((todayUTC - lastLesson) / (1000 * 60 * 60 * 24));
+
         if (diffInDays === 1) {
-            const prev = user?.streakNo || 0;  
-            await userModel.findByIdAndUpdate(userId, { lastLesson: today, streakNo: prev + 1 })
-          
+            const prev = user?.streakNo || 0;
+            await userModel.findByIdAndUpdate(userId, { lastLesson: todayUTC, streakNo: prev + 1 });
             return res.json({ updatePeriod: true });
         }
     } catch (error) {
@@ -263,43 +257,55 @@ export const setStreakAfterLesson = async (req, res) => {
             error: true
         });
     }
-}
+};
 
-export const checkStreak = async (req,res) => {
+export const checkStreak = async (req, res) => {
     try {
-        const userId = req.userId
+        const userId = req.userId;
         const today = new Date();
-        
+        const todayUTC = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
+
         const user = await userModel.findById(userId, { lastLesson: 1, streakNo: 1 });
+        const lastLesson = new Date(user?.lastLesson);
+        const lastLessonUTC = new Date(Date.UTC(lastLesson.getUTCFullYear(), lastLesson.getUTCMonth(), lastLesson.getUTCDate()));
 
-        const lastLesson = user?.lastLesson;
-
-        const todayWithoutTime = new Date(today.setHours(0, 0, 0, 0));
-        const lastLessonWithoutTime = new Date(lastLesson.setHours(0, 0, 0, 0));
-        
-        const diffInDays = Math.floor(( todayWithoutTime - lastLessonWithoutTime) / (1000 * 60 * 60 * 24));
+        const diffInDays = Math.floor((todayUTC - lastLessonUTC) / (1000 * 60 * 60 * 24));
 
         if (diffInDays > 1) {
             await userModel.findByIdAndUpdate(userId, { streakNo: 0 }, { new: true });
-
             return res.json({
                 message: "Streak resetada",
                 reset: true,
                 success: true
             });
         } else {
-           return res.json({
-            message: "streak em dia",
-            success:true
-           })
+            return res.json({
+                message: "Streak em dia",
+                success: true
+            });
         }
-
-
-
     } catch (error) {
         return res.status(500).json({
             message: error.message || error,
-            error:true
-        })
+            error: true
+        });
     }
-}
+};
+
+export const rankList = async (req, res) => {
+    try {
+        const users = await userModel.find({}, 'avatar name xp')
+            .sort({ xp: -1 })
+            .limit(10);
+
+        return res.status(200).json({
+            data: users,
+            success: true
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message || error,
+            error: true
+        });
+    }
+};

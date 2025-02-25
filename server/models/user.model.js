@@ -33,6 +33,11 @@ const userSchema = new mongoose.Schema(
             default: 0
         },
 
+        totalQuestions: {
+            type: Number,
+            default: 0
+        },
+
         lastLesson: {
             type: Date,
             default: ""

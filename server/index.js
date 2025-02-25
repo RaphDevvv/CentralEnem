@@ -8,6 +8,7 @@ import morgan from 'morgan'
 import cookieParser from 'cookie-parser';
 import imageRouter from './routes/image.router.js'
 import questionRouter from './routes/question.router.js'
+import inLessonRouter from './routes/inlesson.router.js'
 
 dotenv.config()
 
@@ -27,6 +28,7 @@ app.use(helmet({
 app.use("/api/user",useRouter )
 app.use("/api/image",imageRouter )
 app.use("/api/question",questionRouter )
+app.use("/api/inlesson",inLessonRouter )
 
 
 app.get("/", (req,res)=>{
