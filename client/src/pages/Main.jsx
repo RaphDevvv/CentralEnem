@@ -53,7 +53,7 @@ const Main = () => {
     <div className='max-w-[150rem] mx-auto'>
       <div className='md:grid xl:grid-cols-[250px_1fr] lg:grid-cols-[120px_1fr] md:grid-cols-[120px_1fr]'>
         {/* Sidebar para telas maiores */}
-        <div className='bg-white h-screen max-h-[50rem] md:block hidden'>
+        <div className='bg-white md:block hidden'>
         <div className='overflow-y-scroll max-h-[calc(100vh-100px)]  sticky top-24'>
           <div className='flex md:flex-col space-y-5 md:py-5 px-4'>
             {options.map((item, index) => (

@@ -43,7 +43,7 @@ const Profile = () => {
       <div className="px-auto p-6 shadow grid grid-cols-1 md:grid-cols-2 gap-6 bg-white mx-5 lg:mx-0">
         {/* Profile Info */}
         <div className="flex flex-col items-center text-center p-4">
-          <form className={`rounded-full h-28  mb-4 relative ${loading ? "animate-pulse" : ""}`}>
+          <form className={`rounded-full h-28 w-28  mb-4 border-1 border-blue-400${loading ? "animate-pulse" : ""}`}>
           { user.avatar ? <img src={user.avatar} className="h-full w-full rounded-full"/> : <FaUserCircle className="text-gray-400 text-7xl w-full h-full" /> }
           <label htmlFor="uploadProfile" className="absolute bottom-0 right-0 cursor-pointer"><MdEdit className="bg-blue-500 rounded-full text-white p-1.5" size={30}/></label> <input
             onChange={handleUpload}
@@ -71,7 +71,7 @@ const Profile = () => {
           <div className="flex flex-col items-center bg-gray-200 shadow-inner-lg p-4 rounded-lg">
             <FaTrophy className="text-yellow-500 text-4xl mb-2" />
             <p className="text-lg font-semibold  text-gray-600 ">XP total</p>
-            <p className="text-2xl font-bold text-gray-700">0</p>
+            <p className="text-2xl font-bold text-gray-700">{user?.xp}</p>
           </div>
 
           <div className="flex flex-col items-center bg-gray-200 shadow-inner-lg p-4 rounded-lg ">

@@ -63,6 +63,26 @@ const summaryApi = {
     check_streak: {
         url: '/api/user/check-streak',
         method: 'put'
+    },
+
+    in_lesson_update_create: {
+        url: '/api/inlesson/update-create',
+        method: 'post'
+    },
+
+    in_lesson_delete: {
+        url: '/api/inlesson/delete',
+        method: 'delete'
+    },
+
+    after_calcs: {
+        url: '/api/inlesson/after-calcs',
+        method: "post"
+    },
+
+    users_rank: {
+        url: '/api/user/users-rank',
+        method: "get"
     }
 }
 

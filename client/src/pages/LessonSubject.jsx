@@ -12,10 +12,10 @@ import { TbCircleLetterDFilled } from "react-icons/tb";
 import { TbCircleLetterEFilled } from "react-icons/tb";
 import correctEffect from '../assets/correct.mp3';
 import wrongEffect from '../assets/wrong.mp3';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import LessonDone from './LessonDone';
 
-const LessonLin = () => {
+const LessonSubject = () => {
     const [questionArray, setQuestionArray] = useState([])
     const [currentQIndex, setCurrentQIndex] = useState(0)
     const [selectedIndex, setSelectedIndex] = useState(null)
@@ -25,16 +25,43 @@ const LessonLin = () => {
     const [progressPercent, setProgressPercent] = useState(0)
     const [lessonDone, setLessonDone] = useState(false)
     const [disableButtons, setDisableButtons] = useState(false)
+    const location = useLocation();
 
-    const getLinQuestions = async () => {
+    const getQuestions = async () => {
+        try {
+            const splitPath = location.pathname.split("/");
+            const lastSegment = splitPath[splitPath.length - 1];
+    
+            console.log(lastSegment);
+    
+            const res = await Axios({
+                ...summaryApi[`get_${lastSegment}`]
+            });
+    
+            if (res.data.success) {
+                setQuestionArray(res.data.data);
+            }
+        } catch (error) {
+            toastError(error);
+        }
+    };
+    
+
+    const handleInLesson = async (qid, userIndex)=>{
         try {
             const res = await Axios({
-                ...summaryApi.get_lin
+                ...summaryApi.in_lesson_update_create,
+                data: {
+                    qid: qid,
+                    userIndex: userIndex
+                }
             })
 
             if (res.data.success) {
-                setQuestionArray(res.data.data)
+                console.log("deu certo fi")
             }
+
+
         } catch (error) {
             toastError(error)
         }
@@ -44,16 +71,22 @@ const LessonLin = () => {
         setSelectedIndex(index);
         setDisableButtons(true)
 
-        if (index === questionArray[currentQIndex]?.corretaIndex) {
-            setCorrectIndex(index);
+        const qid = questionArray[currentQIndex]?._id
+        const correctIndex = questionArray[currentQIndex]?.corretaIndex
+        const userIndex = index
+
+        handleInLesson(qid, userIndex)
+
+        if (correctIndex === userIndex) {
+            setCorrectIndex(correctIndex);
             setOpenSuccess(true)
 
             const correct = new Audio(correctEffect);
             correct.play();
         }
 
-        if (index !== questionArray[currentQIndex]?.corretaIndex) {
-            setCorrectIndex(questionArray[currentQIndex]?.corretaIndex);
+        if (correctIndex !== userIndex) {
+            setCorrectIndex(correctIndex);
             setOpenFail(true)
 
             const wrong = new Audio(wrongEffect)
@@ -91,11 +124,45 @@ const LessonLin = () => {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            getLinQuestions();
+            getQuestions();
         }, 500); 
         return () => clearTimeout(timer); 
     }, []);
 
+
+    useEffect(() => {
+        const deleteInLesson = async ()=>{
+            try {
+                const res = await Axios({
+                    ...summaryApi.in_lesson_delete
+                })
+
+                if (res.data.success) {
+                    console.log("deletou")
+                }
+            } catch (error) {
+                toastError(error)
+            }
+        }
+
+        const handleBeforeUnload = () => {
+            deleteInLesson()
+        };
+    
+        const handlePopState = () => {
+            deleteInLesson()
+        };
+    
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        window.addEventListener('popstate', handlePopState);
+
+        deleteInLesson();
+    
+        return () => {
+          window.removeEventListener('beforeunload', handleBeforeUnload);
+          window.removeEventListener('popstate', handlePopState);
+        };
+      }, [location.pathname]);
 
     return (
         <div className='container mx-auto'>
@@ -148,6 +215,7 @@ const LessonLin = () => {
                                             {
                                                 index === 0 ? <TbCircleLetterAFilled size={30} className='text-gray-800 cusror-pointer' /> : ""
                                             }
+
                                             {
                                                 index === 1 ? <TbCircleLetterBFilled size={30} className='text-gray-800 cusror-pointer' /> : ""
                                             }
@@ -155,6 +223,7 @@ const LessonLin = () => {
                                             {
                                                 index === 2 ? <TbCircleLetterCFilled size={30} className='text-gray-800 cusror-pointer' /> : ""
                                             }
+
                                             {
                                                 index === 3 ? <TbCircleLetterDFilled size={30} className='text-gray-800 cusror-pointer' /> : ""
                                             }
@@ -210,4 +279,4 @@ const LessonLin = () => {
     )
 }
 
-export default LessonLin
+export default LessonSubject

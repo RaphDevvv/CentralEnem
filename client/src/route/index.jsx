@@ -8,10 +8,8 @@ import Simulados from '../pages/Simulados';
 import Profile from '../pages/Profile';
 import Dev from '../pages/Dev';
 import SendQuestions from '../pages/SendQuestions';
-import LessonLin from '../pages/LessonLin';
-import LessonNat from '../pages/LessonNat';
+import LessonSubject from '../pages/LessonSubject';
 import LandingPage from '../pages/LandingPage';
-import LessonHum from '../pages/LessonHum';
 import Desafios from '../pages/Desafios';
 import Ranking from '../pages/Ranking';
 import Statas from '../pages/Stats';
@@ -77,17 +75,17 @@ const router = createBrowserRouter([
         children: [
           {
             path: 'lin',
-            element: <LessonLin />
+            element: <LessonSubject />
           },
 
           {
             path: 'hum',
-            element: <LessonHum />
+            element: <LessonSubject />
           },
 
           {
             path: 'nat',
-            element: <LessonNat/>
+            element: <LessonSubject />
           }
         ]
       }

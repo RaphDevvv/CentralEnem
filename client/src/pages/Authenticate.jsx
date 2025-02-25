@@ -53,6 +53,8 @@ const Authenticate = () => {
         const uDetails = await fetchUser()
         dispatch(setUserDetails(uDetails.data))
         navigate("/main/home")
+
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
@@ -78,6 +80,8 @@ const Authenticate = () => {
         dispatch(setUserDetails(uDetails.data))
         navigate("/main/home")
         toastSuccess(res.data.message)
+
+        window.location.reload();
       }
     } catch (error) {
       toastError(error)

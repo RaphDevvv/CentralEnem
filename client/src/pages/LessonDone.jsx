@@ -4,11 +4,17 @@ import victoryEffect from '../assets/victory.mp3';
 import setStreak from '../utils/setStreak';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Axios from '../utils/axios';
+import fetchUser from '../utils/fetchuser';
+import { setUserDetails } from '../store/userslice';
+import toastError from '../utils/toasterror';
+import summaryApi from '../common/summaryApi';
 
 const LessonDone = () => {
   const user = useSelector(state => state?.user);
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true); // Track loading state
+  const [loading, setLoading] = useState(true);
+  const [xp, setXp] = useState(0)
 
   const playVictorynScroll = () => {
     setTimeout(() => {
@@ -18,11 +24,30 @@ const LessonDone = () => {
     }, 200);
   };
 
+  const handleAfterCalcs = async ()=>{
+    try {
+      const res = await Axios({
+        ...summaryApi.after_calcs
+    })
+
+    if (res.data.success) {
+        const userData = await fetchUser();
+        if (userData && userData.data) {
+            dispatch(setUserDetails(userData.data));
+            setXp(res.data.newXp)
+        }
+    }
+    } catch (error) {
+      toastError(error)
+    }
+  }
+
   useEffect(() => {
     const init = async () => {
-      await setStreak(dispatch); // Ensure setStreak completes
+      await setStreak(dispatch); 
+      handleAfterCalcs()
       playVictorynScroll();
-      setLoading(false); // Mark as ready
+      setLoading(false); 
     };
     init();
   }, []);
@@ -42,7 +67,7 @@ const LessonDone = () => {
         <div className="flex justify-center mb-8 w-full">
           <div className="bg-white p-8 rounded-xl border-2 border-blue-400 text-center w-full">
             <FaTrophy className="h-10 md:h-12 w-10 md:w-12 text-yellow-500 mx-auto mb-4" />
-            <h2 className="text-2xl text-blue-600 mb-2">0 XP</h2>
+            <h2 className="text-2xl text-blue-600 mb-2">{xp} XP</h2>
             <p className="text-blue-500 hidden md:block">Você ganhou de XP nesta lição!</p>
           </div>
         </div>
