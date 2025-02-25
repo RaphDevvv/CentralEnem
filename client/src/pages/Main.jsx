@@ -105,13 +105,13 @@ const Main = () => {
           {
             moreOpt && <div className='absolute top-[-5.5rem] bg-white p-2 w-full'>
                 <div 
-                onClick={() => navigate("/main/ranking")}
+                onClick={() => {navigate("/main/ranking"), setMoreOpt(false)}}
                 className='flex flex-row items-center hover:bg-gray-200 p-2 rounded cursor-pointer gap-2'>
                 <FaRankingStar size={20} className='text-red-500 hover:text-red-700' />
                 <p className='text-sm'>Ranking</p>
               </div>
               <div 
-                onClick={() => navigate("/main/estatisticas")}
+                onClick={() => {navigate("/main/estatisticas"), setMoreOpt(false)}}
                 className='flex flex-row items-center hover:bg-gray-200 p-2 rounded cursor-pointer gap-2'>
                 <GoGraph size={20} className='text-purple-500 hover:text-purple-700' />
                 <p className='text-sm'>Estatísticas</p>
