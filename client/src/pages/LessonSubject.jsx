@@ -188,12 +188,12 @@ const LessonSubject = () => {
                         <div className='flex flex-col justify-center items-center'>
                             <div className='w-full'>
                                 <div className='flex gap-1'>
-                                    <strong className='text-lg flex-start'> {questionArray[currentQIndex]?.numero}</strong>
-                                    <p className='text-lg font-medium'>( {questionArray[currentQIndex]?.ano})</p>
+                                    <strong className='text-lg flex-start'>questão {questionArray[currentQIndex]?.numero}</strong>
+                                    <p className='text-lg font-medium'>(Enem {questionArray[currentQIndex]?.ano})</p>
                                 </div>
                                 <Divider />
                             </div>
-                            <div className='max-w-[50rem] mr-auto'>
+                            <div key={currentQIndex} className='max-w-[50rem] mr-auto'>
                                 {
                                     questionArray.length > 0 && parse(
                                         questionArray[currentQIndex]?.html.replace(
