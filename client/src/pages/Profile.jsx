@@ -76,8 +76,8 @@ const Profile = () => {
 
           <div className="flex flex-col items-center bg-gray-200 shadow-inner-lg p-4 rounded-lg ">
             <FaClipboardList className="text-green-500 text-4xl mb-2" />
-            <p className="text-lg font-semibold  text-gray-600 w-full">Questões Totais</p>
-            <p className="text-2xl font-bold text-gray-700">em breve</p>
+            <p className="text-lg font-semibold  text-gray-600">Questões feitas</p>
+            <p className="text-2xl font-bold text-gray-700">{user?.totalQuestions}</p>
           </div>
 
           <div className="flex flex-col items-center bg-gray-200 shadow-inner-lg p-4 rounded-lg">

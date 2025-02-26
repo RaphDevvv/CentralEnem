@@ -37,6 +37,7 @@ const exams = [
     textColor: 'text-red-500', 
     buttonHover: 'hover:bg-red-600',
     description: 'Domine os números com questões de Álgebra, Geometria e Estatística.',
+    onClickPath: "/lesson/mat",
     icon: <MdCalculate size={50} className="text-white" />
   },
 ];

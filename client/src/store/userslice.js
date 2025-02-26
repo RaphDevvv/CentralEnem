@@ -20,6 +20,7 @@ const userSlice = createSlice({
             state.avatar = action.payload?.avatar
             state.xp = action.payload?.xp
             state.streakNo = action.payload?.streakNo
+            state.totalQuestions = action.payload?.totalQuestions
             state.role = action.payload?.role
         }, 
 

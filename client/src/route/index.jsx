@@ -87,6 +87,11 @@ const router = createBrowserRouter([
           {
             path: 'nat',
             element: <LessonSubject />
+          },
+          
+          {
+            path: 'mat',
+            element: <LessonSubject />
           }
         ]
       }

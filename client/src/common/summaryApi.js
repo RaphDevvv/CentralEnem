@@ -55,6 +55,11 @@ const summaryApi = {
         method: 'get'
     },
 
+    get_mat: {
+        url: '/api/question/get-mat',
+        method: 'get'
+    },
+
     set_streak_after_lesson: {
         url: '/api/user/set-streak',
         method: 'put'
