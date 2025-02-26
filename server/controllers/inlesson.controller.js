@@ -76,9 +76,9 @@ export const afterLessonCalcs = async (req,res)=>{
 
         if (rightPercent === 1) {
             xpPerQuestion = 14; 
-        } else if (rightPercent > 0.8) {
+        } else if (rightPercent >= 0.8) {
             xpPerQuestion = 12;
-        } else if (rightPercent > 0.6) {
+        } else if (rightPercent >= 0.6) {
             xpPerQuestion = 10; 
         } else if (rightPercent < 0.6) {
             xpPerQuestion = 8

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import auth from "../middleware/auth.js";
-import { getQuestionsHum, getQuestionsLin, getQuestionsNat, postQuestion } from "../controllers/question.controller.js";
+import { getQuestionsHum, getQuestionsLin, getQuestionsMat, getQuestionsNat, postQuestion } from "../controllers/question.controller.js";
 import { verifyAdmin } from "../middleware/isAdmin.js";
 
 const questionRouter = Router()
@@ -10,5 +10,6 @@ questionRouter.get('/admin-check', auth, verifyAdmin)
 questionRouter.get('/get-lin', auth, getQuestionsLin)
 questionRouter.get('/get-hum', auth, getQuestionsHum)
 questionRouter.get('/get-nat', auth, getQuestionsNat)
+questionRouter.get('/get-mat', auth, getQuestionsMat)
 
 export default questionRouter
