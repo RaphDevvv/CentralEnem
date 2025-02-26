@@ -3,7 +3,7 @@ import userModel from '../models/user.model.js'
 
 export const verifyAdmin = async (req, res, next) => {
     try {
-        const token = req.cookies.token || req?.headers?.authorization?.split(" ")[1];
+        const token = req.cookies?.token || req?.headers?.authorization?.split(" ")[1];
         if (!token) return res.status(401).json({ message: "Access denied" });
 
         const decoded = await jwt.verify(token, process.env.TOKEN_KEY);
@@ -16,6 +16,9 @@ export const verifyAdmin = async (req, res, next) => {
 
         next();
     } catch (error) {
-        res.status(500).json({ message: "Invalid or expired token", error: true });
+        return res.status(500).json({
+            message: error.message || error,
+            error: true
+        })
     }
 };
