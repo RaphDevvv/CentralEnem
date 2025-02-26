@@ -31,7 +31,7 @@ const Ranking = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 414);
+      setIsSmallScreen(window.innerWidth < 360);
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -47,18 +47,18 @@ const Ranking = () => {
         {users.map((user, index) => (
           <div key={index} className=' cursor-pointer bg-white p-4 rounded-lg shadow-md flex justify-between items-center hover:scale-101 transition-transform'>
             <div className='flex items-center gap-4'>
-              <div className='w-16 h-16 rounded-full flex items-center justify-center shadow-md'>
+              <div className='w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-md'>
                 {
                   user?.avatar ? <img className='w-full h-full rounded-full' src={user?.avatar}/> :  <FaUserCircle className='text-blue-500 w-full h-full' />
                 }
               </div>
               <div className='flex flex-col'>
-                <p className={`font-semibold text-gray-700 text-lg break-words md:max-w-[20rem] ${isSmallScreen ? 'max-w-[6rem]' : 'max-w-[11rem]'}`}>{user.name}</p>
+                <p className={`font-semibold text-gray-700 md:text-lg break-words md:max-w-[20rem] ${isSmallScreen ? 'max-w-[6rem]' : 'max-w-[10rem]'}`}>{user.name}</p>
                 <p className='font-medium text-gray-600 text-md'>{user.xp} XP</p>
               </div>
             </div>
 
-            <div className='bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-full flex items-center justify-center font-semibold text-lg shadow-md'>
+            <div className='bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-lg flex items-center justify-center font-semibold md:text-lg shadow-md'>
               <p># {index + 1}</p>
             </div>
           </div>

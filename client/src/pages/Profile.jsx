@@ -43,7 +43,7 @@ const Profile = () => {
       <div className="px-auto p-6 shadow grid grid-cols-1 md:grid-cols-2 gap-6 bg-white mx-5 lg:mx-0">
         {/* Profile Info */}
         <div className="flex flex-col items-center text-center p-4">
-          <form className={`rounded-full h-28 w-28  mb-4 border-1 border-blue-400${loading ? "animate-pulse" : ""}`}>
+          <form className={`rounded-full h-28 w-28 relative mb-4 border-1 border-blue-400${loading ? "animate-pulse" : ""}`}>
           { user.avatar ? <img src={user.avatar} className="h-full w-full rounded-full"/> : <FaUserCircle className="text-gray-400 text-7xl w-full h-full" /> }
           <label htmlFor="uploadProfile" className="absolute bottom-0 right-0 cursor-pointer"><MdEdit className="bg-blue-500 rounded-full text-white p-1.5" size={30}/></label> <input
             onChange={handleUpload}

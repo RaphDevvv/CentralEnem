@@ -5,12 +5,13 @@ import toastError from '../utils/toasterror'
 import summaryApi from '../common/summaryApi'
 import toastSuccess from '../utils/toastsuccess'
 import Axios from '../utils/axios'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../store/userslice'
 
 const UserMenu = ({setOpenMenu}) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const user = useSelector(state=>state.user)
 
   const handleLogout = async ()=>{
     try {
@@ -39,8 +40,21 @@ const UserMenu = ({setOpenMenu}) => {
       </div>
 
     <div className='py-2'>
+ 
       <div className='bg-gray-300 p-[0.5px]'>
       </div>
+
+      {
+        user?.role === "ADMIN" && <div>      <div 
+      onClick={()=>{navigate("/dev/sendq"), setOpenMenu(false)}}
+      className='p-3 py-auto hover:bg-blue-100 rounded transiton duration-300 cursor-pointer hover:text-blue-500'>
+        Enviar quest.
+      </div>
+
+      <div className='bg-gray-300 p-[0.5px]'>
+      </div> </div>
+      }
+
     </div>
 
       <div 

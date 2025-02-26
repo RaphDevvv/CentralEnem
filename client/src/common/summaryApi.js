@@ -83,6 +83,11 @@ const summaryApi = {
     users_rank: {
         url: '/api/user/users-rank',
         method: "get"
+    },
+
+    admin_check: {
+        url: '/api/question/admin-check',
+        method: "get"
     }
 }
 

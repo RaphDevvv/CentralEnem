@@ -1,7 +1,7 @@
 import React from 'react'
 import UserMenu from './UserMenu'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Axios from '../utils/axios'
 import summaryApi from '../common/summaryApi'
 import toastError from '../utils/toasterror'
@@ -9,8 +9,9 @@ import toastSuccess from '../utils/toastsuccess'
 import { logout } from '../store/userslice'
 
 const MobileUserMenu = ({setOpenMobileMenu}) => {
-     const navigate = useNavigate()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
+  const user = useSelector(state=>state.user)
 
   const handleLogout = async ()=>{
     try {
@@ -41,6 +42,22 @@ const MobileUserMenu = ({setOpenMobileMenu}) => {
                     <div className='bg-gray-300 p-[0.5px]'>
                     </div>
                 </div>
+
+                {
+                  user?.role === "ADMIN" && <div>
+
+                <div 
+                onClick={()=>{navigate("/dev/sendq", setOpenMobileMenu(false))}}
+                className='p-3 py-auto hover:bg-blue-100 rounded transiton duration-300 cursor-pointer hover:text-blue-500'>
+                    Enviar questões
+                </div>
+
+                <div className='py-2'>
+                    <div className='bg-gray-300 p-[0.5px]'>
+                    </div>
+                </div>
+                  </div>
+                }
 
                 <div 
                       onClick={

@@ -137,21 +137,53 @@ const SendQuestions = () => {
                             className="py-2 px-3 border border-blue-500 rounded-lg bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-300 w-full h-24"
                         />
 
-                        <div className='flex flex-row gap-2 mt-2'>
+                        <div className='flex flex-wrap gap-2 mt-2'>
                             <button
                                 onClick={() => addHtmlButton("<p></p>")}
                                 className='px-4 py-1 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300 rounded-lg cursor-pointer'>
-                                {"<p/>"}
+                                {"p -m"}
+                            </button>
+
+                            <button
+                                onClick={() => addHtmlButton(`<p className="mt-2"></p>`)}
+                                className='px-4 py-1 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300 rounded-lg cursor-pointer'>
+                                {"p +m"}
                             </button>
                             <button
                                 onClick={() => addHtmlButton("<p className='text-sm mt-2'></p>")}
                                 className='px-4 py-1 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300 rounded-lg cursor-pointer'>
-                                {"<p/> small"}
+                                {"fonte"}
                             </button>
+
+                            <button
+                                onClick={() => addHtmlButton(`<img className="w-[30rem]" src=""/>`)}
+                                className='px-4 py-1 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300 rounded-lg cursor-pointer'>
+                                {"img q"}
+                            </button>
+
+                            <button
+                                onClick={() => addHtmlButton(`<img className="w-[30rem] mx-auto" src=""/>`)}
+                                className='px-4 py-1 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300 rounded-lg cursor-pointer'>
+                                {"img qc"}
+                            </button>
+
+                            
+                            <button
+                                onClick={() => addHtmlButton(`<img className="w-[50rem]" src=""/>`)}
+                                className='px-4 py-1 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300 rounded-lg cursor-pointer'>
+                                {"img r"}
+                            </button>
+
                             <button
                                 onClick={() => addHtmlButton("<strong></strong>")}
                                 className='px-4 py-1 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300 rounded-lg cursor-pointer'>
                                 {"<strong/>"}
+                            </button>
+
+                            <button
+                                onClick={() => addHtmlButton(`<p className="font-bold mt-2"></p>`)}
+                                className='px-4 py-1 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300 rounded-lg cursor-pointer'>
+                                {"strong +m"}
                             </button>
                         </div>
                     </div>
@@ -204,7 +236,7 @@ const SendQuestions = () => {
                             <input
                                 type="text"
                                 name="conteudo"
-                                value={data.conteudo.join(', ')}
+                                value={data.conteudo.join(',')}
                                 onChange={(e) => setData({ ...data, conteudo: e.target.value.split(',') })}
                                 className="py-2 px-3 border border-blue-500 rounded-lg bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-300 w-full"
                             />

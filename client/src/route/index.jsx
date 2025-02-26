@@ -14,6 +14,7 @@ import Desafios from '../pages/Desafios';
 import Ranking from '../pages/Ranking';
 import Statas from '../pages/Stats';
 import Stats from '../pages/Stats';
+import IsAdmin from '../permissions/IsAdmin';
 
 const router = createBrowserRouter([
   {
@@ -61,11 +62,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dev",
-        element: <Dev />,
+        element: <Dev/>,
         children: [
           {
             path: 'sendq',
-            element: <SendQuestions />
+            element:  <IsAdmin><SendQuestions /></IsAdmin>  
           }
         ]
       },
