@@ -93,6 +93,11 @@ const summaryApi = {
     admin_check: {
         url: '/api/question/admin-check',
         method: "get"
+    },
+
+    get_stats: {
+        url: '/api/question/get-stats',
+        method: 'post'
     }
 }
 

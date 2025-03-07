@@ -42,6 +42,16 @@ const userSchema = new mongoose.Schema(
             type: Date,
             default: ""
         },
+
+        questionRightArray: {
+            type: [String],
+            default: []
+        },
+    
+        questionWrongArray: {
+            type: [String],
+            default: []
+        },
         
         role: {
             type: String,

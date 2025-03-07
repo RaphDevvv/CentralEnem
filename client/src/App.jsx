@@ -9,6 +9,7 @@ import Axios from './utils/axios';
 import summaryApi from './common/summaryApi';
 import { endStreak, setUserDetails } from './store/userslice';
 import toastError from './utils/toasterror';
+import checkStreak from './utils/checkStreak';
 
 function App() {
   const dispatch = useDispatch()
@@ -30,26 +31,10 @@ function App() {
     }
 }
 
-  const fetchStreak = async ()=>{
-    try {
-      const res = await Axios({
-        ...summaryApi.check_streak
-      })
-
-      if (res.data.reset) {
-        dispatch(endStreak(0))
-      } else {
-        console.log("streak em dia")
-      }
-    } catch (error) {
-      console.log("ERRO AQUI", error)
-    }
-  }
-
   const location = useLocation()
 
   useEffect(()=>{
-    fetchStreak()
+
     fetchUser()
   },[])
   return (

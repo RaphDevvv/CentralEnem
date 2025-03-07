@@ -10,12 +10,15 @@ import toastError from '../utils/toasterror';
 import fetchUser from '../utils/fetchuser';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserDetails } from '../store/userslice';
+import { IoEye } from "react-icons/io5";
+import { IoEyeOff } from "react-icons/io5";
 
 const Authenticate = () => {
-  const user = useSelector(state=>state?.user)
+  const user = useSelector(state => state?.user)
   const navigate = useNavigate()
   const [login, setLogin] = useState(true);
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const [formData, setFormData] = useState({
     name: "",
@@ -48,7 +51,7 @@ const Authenticate = () => {
       });
 
       if (res.data.success) {
-        
+
         setFormData({ name: "", email: "", password: "", confirmPassword: "" });
         const uDetails = await fetchUser()
         dispatch(setUserDetails(uDetails.data))
@@ -87,11 +90,11 @@ const Authenticate = () => {
     }
   };
 
-  useLayoutEffect(()=>{
+  useLayoutEffect(() => {
     if (user?._id) {
       navigate("/main/home")
     }
-  },[user])
+  }, [user])
 
   return (
     <div className='container mx-auto px-5 md:grid md:grid-cols-2'>
@@ -125,11 +128,26 @@ const Authenticate = () => {
 
               <div className='flex flex-col'>
                 <label className='font-medium text-sm text-gray-800'>Senha</label>
-                <input type='password' name='password' value={formData.password} onChange={handleChange} className='py-1 px-2 border border-blue-500 rounded-lg bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-300' />
+                <div className='group flex items-center py-1 px-2 border border-blue-500 rounded-lg bg-blue-50 focus-within:ring-2 focus-within:ring-blue-300'>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    name='password'
+                    value={formData.password}
+                    onChange={handleChange}
+                    className='w-full bg-transparent focus:outline-none'
+                  />
+                  <button
+                    onClick={() => setShowPassword(prev => !prev)}
+                    className='cursor-pointer text-gray-800 hover:text-gray-600 transition duration-300'
+                  >
+                    {showPassword ? <IoEyeOff /> : <IoEye />}
+                  </button>
+                </div>
               </div>
 
+
               <button onClick={handleLogin} className={` ${loading && "cursor-not-allowed"} w-full py-3 bg-blue-500 text-white font-semibold hover:bg-blue-600 transition-colors duration-300 cursor-pointer rounded-sm`}>
-                { loading ? "..." : "Confirmar"}
+                {loading ? "..." : "Confirmar"}
               </button>
             </div>
           ) : (
@@ -146,16 +164,44 @@ const Authenticate = () => {
 
               <div className='flex flex-col'>
                 <label className='font-medium text-sm text-gray-800'>Senha</label>
-                <input name='password' value={formData.password} onChange={handleChange} className='py-1 px-2 border border-blue-500 rounded-lg bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-300' />
+                <div className='group flex items-center py-1 px-2 border border-blue-500 rounded-lg bg-blue-50 focus-within:ring-2 focus-within:ring-blue-300'>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    name='password'
+                    value={formData.password}
+                    onChange={handleChange}
+                    className='w-full bg-transparent focus:outline-none'
+                  />
+                  <button
+                    onClick={() => setShowPassword(prev => !prev)}
+                    className='cursor-pointer text-gray-800 hover:text-gray-600 transition duration-300'
+                  >
+                    {showPassword ? <IoEyeOff /> : <IoEye />}
+                  </button>
+                </div>
               </div>
 
               <div className='flex flex-col'>
                 <label className='font-medium text-sm text-gray-800'>Confirmar senha</label>
-                <input name='confirmPassword' value={formData.confirmPassword} onChange={handleChange} className='py-1 px-2 border border-blue-500 rounded-lg bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-300' />
+                <div className='group flex items-center py-1 px-2 border border-blue-500 rounded-lg bg-blue-50 focus-within:ring-2 focus-within:ring-blue-300'>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    name='confirmPassword'
+                    value={formData.confirmPasswordpassword}
+                    onChange={handleChange}
+                    className='w-full bg-transparent focus:outline-none'
+                  />
+                  <button
+                    onClick={() => setShowPassword(prev => !prev)}
+                    className='cursor-pointer text-gray-800 hover:text-gray-600 transition duration-300'
+                  >
+                    {showPassword ? <IoEyeOff /> : <IoEye />}
+                  </button>
+                </div>
               </div>
 
               <button onClick={handleRegister} className={`w-full ${loading && "cursor-not-allowed"} py-3 bg-blue-500 text-white font-semibold hover:bg-blue-600 transition-colors duration-300 cursor-pointer rounded-sm`}>
-              { loading ? "..." : "Confirmar"}
+                {loading ? "..." : "Confirmar"}
               </button>
             </div>
           )}

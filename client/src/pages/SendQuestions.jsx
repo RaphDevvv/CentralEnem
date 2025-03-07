@@ -149,6 +149,7 @@ const SendQuestions = () => {
                                 className='px-4 py-1 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300 rounded-lg cursor-pointer'>
                                 {"p +m"}
                             </button>
+                            
                             <button
                                 onClick={() => addHtmlButton("<p className='text-sm mt-2'></p>")}
                                 className='px-4 py-1 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300 rounded-lg cursor-pointer'>
@@ -159,6 +160,12 @@ const SendQuestions = () => {
                                 onClick={() => addHtmlButton(`<img className="w-[30rem]" src=""/>`)}
                                 className='px-4 py-1 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300 rounded-lg cursor-pointer'>
                                 {"img q"}
+                            </button>
+
+                            <button
+                                onClick={() => addHtmlButton(`<img className="w-[30rem] mt-2" src=""/>`)}
+                                className='px-4 py-1 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300 rounded-lg cursor-pointer'>
+                                {"img q +m"}
                             </button>
 
                             <button

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { FaHome } from "react-icons/fa";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { MdOutlineNoteAlt } from "react-icons/md";
 import { FaTrophy } from "react-icons/fa";
 import { FaRankingStar } from "react-icons/fa6";
 import { CgMoreO, CgProfile } from "react-icons/cg";
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { GoGraph } from "react-icons/go";
+import checkStreak from '../utils/checkStreak';
 
 const options = [
   {
@@ -39,6 +40,7 @@ const options = [
 const Main = () => {
   const [moreOpt, setMoreOpt] = useState(false)
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const location = useLocation();
 
@@ -46,6 +48,7 @@ const Main = () => {
     if (location.pathname === '/main') {
       navigate('/main/home');
     }
+    checkStreak(dispatch)
   }, []); // Dependência vazia -> executa apenas uma vez ao montar
 
 
@@ -75,25 +78,25 @@ const Main = () => {
         </div>
 
         {/* Sidebar for mobile (fixed at bottom) */}
-        <div className='md:hidden fixed bottom-0 w-full  border-t-2 border-gray-300'>
+        <div className='md:hidden fixed bottom-0 w-full border-t-2 border-gray-300'>
           <div className='flex justify-around py-3 bg-white'>
             <div 
-            onClick={()=>navigate("/main/home")}
-            className='flex flex-col items-center hover:bg-gray-200 p-2 rounded cursor-pointer'>
+              onClick={()=>navigate("/main/home")}
+              className='flex flex-col items-center hover:bg-gray-200 p-2 rounded cursor-pointer'>
               <FaHome size={26} className='text-blue-500 hover:text-blue-700' />
               <p className='text-sm'>Home</p>
             </div>
             <div 
-            onClick={()=>navigate("/main/simulados")}
-            className='flex flex-col items-center hover:bg-gray-200 p-2 rounded cursor-pointer'>
-              <MdOutlineNoteAlt size={26} className='text-yellow-500 hover:text-yellow-700' />
-              <p className='text-sm'>Simulados</p>
+              onClick={()=>navigate("/main/ranking")}
+              className='flex flex-col items-center hover:bg-gray-200 p-2 rounded cursor-pointer'>
+              <FaRankingStar size={26} className='text-red-500 hover:text-red-700' />
+              <p className='text-sm'>Ranking</p>
             </div>
             <div 
-            onClick={()=>navigate("/main/desafios")}
-            className='flex flex-col items-center hover:bg-gray-200 p-2 rounded cursor-pointer'>
-              <FaTrophy size={26} className='text-green-500 hover:text-green-700' />
-              <p className='text-sm'>Desafios</p>
+              onClick={()=>navigate("/main/estatisticas")}
+              className='flex flex-col items-center hover:bg-gray-200 p-2 rounded cursor-pointer'>
+              <GoGraph size={26} className='text-purple-500 hover:text-purple-700' />
+              <p className='text-sm'>Estatísticas</p>
             </div>
             <div 
               onClick={()=>setMoreOpt(!moreOpt)}
@@ -104,17 +107,17 @@ const Main = () => {
           </div>
           {
             moreOpt && <div className='absolute top-[-5.5rem] bg-white p-2 w-full'>
-                <div 
-                onClick={() => {navigate("/main/ranking"), setMoreOpt(false)}}
+              <div 
+                onClick={() => {navigate("/main/simulados"); setMoreOpt(false)}}
                 className='flex flex-row items-center hover:bg-gray-200 p-2 rounded cursor-pointer gap-2'>
-                <FaRankingStar size={20} className='text-red-500 hover:text-red-700' />
-                <p className='text-sm'>Ranking</p>
+                <MdOutlineNoteAlt size={20} className='text-yellow-500 hover:text-yellow-700' />
+                <p className='text-sm'>Simulados</p>
               </div>
               <div 
-                onClick={() => {navigate("/main/estatisticas"), setMoreOpt(false)}}
+                onClick={() => {navigate("/main/desafios"); setMoreOpt(false)}}
                 className='flex flex-row items-center hover:bg-gray-200 p-2 rounded cursor-pointer gap-2'>
-                <GoGraph size={20} className='text-purple-500 hover:text-purple-700' />
-                <p className='text-sm'>Estatísticas</p>
+                <FaTrophy size={20} className='text-green-500 hover:text-green-700' />
+                <p className='text-sm'>Desafios</p>
               </div>
             </div>
           }

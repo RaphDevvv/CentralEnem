@@ -8,6 +8,12 @@ const inLessonSchema = new mongoose.Schema({
         required: true
     },
 
+    subject: {
+        type: String,
+        enum: ["lin", "hum", "nat", "mat"],
+        default: null
+    },
+
     questionNo : {
         type: Number,
         default: 0
@@ -16,6 +22,16 @@ const inLessonSchema = new mongoose.Schema({
     questionsRight : {
         type: Number,
         default: 0
+    },
+
+    questionRightArray: {
+        type: [String],
+        default: []
+    },
+
+    questionWrongArray: {
+        type: [String],
+        default: []
     }
 })
 
