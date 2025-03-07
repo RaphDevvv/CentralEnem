@@ -3,9 +3,11 @@ import { FaUserCircle } from "react-icons/fa";
 import toastError from '../utils/toasterror';
 import Axios from '../utils/axios';
 import summaryApi from '../common/summaryApi';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Ranking = () => {
   const [users, setUsers] = useState([])
+  const navigate = useNavigate()
 
   const fetchUsers = async ()=>{
     try {
@@ -22,6 +24,12 @@ const Ranking = () => {
       toastError(error)
     }
   }
+
+  const formatName = (name) => {
+    const finalName = name.replace(/ /g, "-");
+    return finalName;
+};
+
 
   useEffect(()=>{
     fetchUsers()
@@ -45,7 +53,9 @@ const Ranking = () => {
 
       <div className='w-full max-w-3xl flex flex-col gap-4'>
         {users.map((user, index) => (
-          <div key={index} className=' cursor-pointer bg-white p-4 rounded-lg shadow-md flex justify-between items-center hover:scale-101 transition-transform'>
+          <Link key={index} 
+          to={`/user-profile/${formatName(user.name)}`}
+          className=' cursor-pointer bg-white hover:bg-gray-100 active:bg-gray-100 p-4 rounded-lg shadow-md flex justify-between items-center hover:scale-101 active:scale-101 transition-transform'>
             <div className='flex items-center gap-4'>
               <div className='w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-md'>
                 {
@@ -61,7 +71,7 @@ const Ranking = () => {
             <div className='bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-lg flex items-center justify-center font-semibold md:text-lg shadow-md'>
               <p># {index + 1}</p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

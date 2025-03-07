@@ -59,7 +59,7 @@ const Authenticate = () => {
 
       }
     } catch (error) {
-      console.log(error);
+      toastError(error)
     } finally {
       setLoading(false)
     }

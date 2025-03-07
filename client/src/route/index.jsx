@@ -15,6 +15,7 @@ import Ranking from '../pages/Ranking';
 import Statas from '../pages/Stats';
 import Stats from '../pages/Stats';
 import IsAdmin from '../permissions/IsAdmin';
+import DiffUserProfile from '../pages/diffUserProfile';
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <LandingPage /> // This will show the landing page as the default page
+        element: <LandingPage /> 
       },
       {
         path: "main",
@@ -59,6 +60,11 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />
+      },
+
+      {
+        path: "/user-profile/:name",
+        element: <DiffUserProfile />
       },
       {
         path: "/dev",

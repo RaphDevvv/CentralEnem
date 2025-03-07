@@ -7,6 +7,23 @@ export const registerUser = async (req,res)=>{
     try {
         const {name, email, password} = req.body
         
+        const alreadyName = await userModel.findOne({ name })
+        const alreadyEmail = await userModel.findOne({ email })
+
+        if (alreadyName) {
+            return res.status(500).json({
+                message: "Nome já registrado",
+                error: true
+            })
+        }
+
+        if (alreadyEmail) {
+            return res.status(500).json({
+                message: "Email já registrado",
+                error: true
+            })
+        }
+       
         const hashedPassword = await bcrypt.hash(password, 10)
 
         const newUser = userModel ({
@@ -309,3 +326,21 @@ export const rankList = async (req, res) => {
         });
     }
 };
+
+export const findUserByName = async (req,res) => {
+    try {
+        const { name } = req.body
+
+        const user = await userModel.findOne({name})
+
+        return res.json({
+            success:true,
+            user: user
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message || error,
+            error: true
+        })
+    }
+}

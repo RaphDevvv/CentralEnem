@@ -98,6 +98,11 @@ const summaryApi = {
     get_stats: {
         url: '/api/question/get-stats',
         method: 'post'
+    },
+
+    find_user_by_name: {
+        url: '/api/user/name-find',
+        method: 'post'
     }
 }
 
