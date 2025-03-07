@@ -34,7 +34,7 @@ const MobileUserMenu = ({setOpenMobileMenu}) => {
             <div >
                 <div 
                 onClick={()=>{navigate("/profile", setOpenMobileMenu(false))}}
-                className='p-3 py-auto hover:bg-blue-100 rounded transiton duration-300 cursor-pointer hover:text-blue-500'>
+                className='p-3 py-auto hover:bg-blue-100 active:bg-blue-100  rounded transiton duration-300 cursor-pointer active:text-blue-500 hover:text-blue-500'>
                     Perfil
                 </div>
 
@@ -48,7 +48,7 @@ const MobileUserMenu = ({setOpenMobileMenu}) => {
 
                 <div 
                 onClick={()=>{navigate("/dev/sendq", setOpenMobileMenu(false))}}
-                className='p-3 py-auto hover:bg-blue-100 rounded transiton duration-300 cursor-pointer hover:text-blue-500'>
+                className='p-3 py-auto hover:bg-blue-100 active:bg-blue-100  rounded transiton duration-300 cursor-pointer hover:text-blue-500 active:text-blue-500'>
                     Enviar questões
                 </div>
 
@@ -67,7 +67,7 @@ const MobileUserMenu = ({setOpenMobileMenu}) => {
                           setOpenMobileMenu(false)
                         }
                       }
-                className='p-3 py-auto hover:bg-red-100 rounded transiton duration-300 cursor-pointer hover:text-red-500'>
+                className='p-3 py-auto hover:bg-red-100 active:bg-red-100 rounded transiton duration-300 cursor-pointer active:text-red-500 hover:text-red-500'>
                     Logout
                 </div>
             </div>

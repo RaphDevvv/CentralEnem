@@ -8,7 +8,7 @@ const exams = [
     title: 'Linguagens', 
     color: 'from-yellow-400 to-yellow-500', 
     textColor: 'text-yellow-500', 
-    buttonHover: 'hover:bg-yellow-600',
+    buttonHover: 'hover:bg-yellow-600 active:bg-yellow-600 ',
     description: 'Teste seus conhecimentos em Língua Portuguesa, Literatura e Inglês/Espanhol.',
     onClickPath: "/lesson/lin",
     icon: <MdLanguage size={50} className="text-white" />
@@ -17,7 +17,7 @@ const exams = [
     title: 'Ciências Humanas', 
     color: 'from-blue-400 to-blue-500', 
     textColor: 'text-blue-500', 
-    buttonHover: 'hover:bg-blue-600',
+    buttonHover: 'hover:bg-blue-600 active:bg-blue-600 ',
     description: 'História, Geografia, Filosofia e Sociologia te esperam aqui!',
     onClickPath: "/lesson/hum",
     icon: <FaPersonHiking size={50} className="text-white" />
@@ -26,7 +26,7 @@ const exams = [
     title: 'Ciências da Natureza', 
     color: 'from-green-400 to-green-500', 
     textColor: 'text-green-500', 
-    buttonHover: 'hover:bg-green-600',
+    buttonHover: 'hover:bg-green-600 active:bg-green-600',
     description: 'Biologia, Química e Física para você desafiar seu conhecimento.',
     onClickPath: "/lesson/nat",
     icon: <MdScience size={50} className="text-white" />
@@ -35,7 +35,7 @@ const exams = [
     title: 'Matemática', 
     color: 'from-red-400 to-red-500', 
     textColor: 'text-red-500', 
-    buttonHover: 'hover:bg-red-600',
+    buttonHover: 'hover:bg-red-600 active:bg-red-600',
     description: 'Domine os números com questões de Álgebra, Geometria e Estatística.',
     onClickPath: "/lesson/mat",
     icon: <MdCalculate size={50} className="text-white" />
@@ -63,7 +63,7 @@ const Home = () => {
             </div>
             <button 
               onClick={()=>navegar(exam.onClickPath)}
-              className={`mt-4 px-4 py-2 bg-white ${exam.textColor} font-semibold rounded-md transition-all transform hover:scale-101 cursor-pointer hover:text-white ${exam.buttonHover}`}
+              className={`mt-4 px-4 py-2 bg-white ${exam.textColor} font-semibold rounded-md transition-all transform hover:scale-101 cursor-pointer hover:text-white active:text-white ${exam.buttonHover}`}
             >
               Iniciar
             </button>

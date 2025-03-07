@@ -42,7 +42,7 @@ const Stats = () => {
   
   
   if (!resData) {
-    return <div className='p-6 bg-gray-100 text-center text-gray-700 text-lg'>Carregando...</div>;
+    return <div className='p-6 text-center text-gray-700 text-lg'>Carregando...</div>;
   }
   const data = {
     labels: ['Acertos', 'Erros'],
@@ -62,35 +62,39 @@ const Stats = () => {
     {
       nome: "Linguagens",
       shortName: "lin",
-      textColor: 'text-yellow-400',
+      bgColor: 'bg-yellow-400',
+      textColor: 'text-yellow-400'
     },
     {
       nome: "Ciências Humanas",
       shortName: "hum",
+      bgColor: 'bg-blue-400',
       textColor: 'text-blue-400'
     },
     {
       nome: "Ciências da Natureza",
       shortName: "nat",
-      textColor: 'text-green-400',
+      bgColor: 'bg-green-400',
+      textColor: 'text-green-400'
     },
     {
       nome: "Matemática",
       shortName: "mat",
+      bgColor: 'bg-red-400',
       textColor: 'text-red-400'
     }
   ];
   return (
 
     <div className='p-6'>
-    <div className='flex flex-row p-3 bg-blue-100 mb-6 rounded gap-2 overflow-y-scroll'>
+    <div className='flex flex-row mb-6 rounded gap-2 overflow-y-scroll no-scrollbar'>
       {subjects.map((subject, index) => (
         <div
           key={index}
           onClick={()=>setSelectedSub(subject.shortName)}
-          className={`flex items-center justify-center gap-2 p-2 rounded cursor-pointer bg-white hover:bg-gray-100 shadow-lg ${selectedSub === subject.shortName ? "border-blue-400 border-2" : ""}`}
+          className={`flex items-center justify-center gap-2 p-2  rounded cursor-pointer transition durations-300  shadow-lg ${selectedSub === subject.shortName ? `bg-white ${subject.textColor}` : `text-white ${subject.bgColor}`}`}
         >
-          <p className={`font-semibold text-nowrap ${subject.textColor}`}>{subject.nome}</p>
+          <p className={`font-semibold text-nowrap `}>{subject.nome}</p>
         </div>
       ))}
     </div>
@@ -112,28 +116,32 @@ const Stats = () => {
             {/* Seções de Tópicos Corretos e Incorretos */}
             <div className='space-y-6 lg:flex lg:space-x-6'>
               {/* Tópicos com Mais Acertos */}
-              <div>
-                <p className='font-semibold text-gray-700 mb-2 '>Mais acertos em</p>
-                <div className='bg-green-100 p-4 rounded-lg shadow-md'>
-                  <ul className='list-disc pl-5 text-gray-800'>
-                    {mostCorrectTopics.map((topic, index) => (
-                      <li key={index}>{topic}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+          {
+            mostCorrectTopics.length > 0 ?               <div>
+            <p className='font-semibold text-gray-700 mb-2 '>Mais acertos em</p>
+            <div className='bg-green-100 p-4 rounded-lg shadow-md'>
+              <ul className='list-disc pl-5 text-gray-800'>
+                {mostCorrectTopics.map((topic, index) => (
+                  <li key={index}>{topic}</li>
+                ))}
+              </ul>
+            </div>
+          </div> : ""
+          }
   
               {/* Tópicos com Mais Erros */}
-              <div>
-                <p className='font-semibold text-gray-700 mb-2'>Mais erros em:</p>
-                <div className='bg-red-100 p-4 rounded-lg shadow-md'>
-                  <ul className='list-disc pl-5 text-gray-800'>
-                    {mostIncorrectTopics.map((topic, index) => (
-                      <li key={index}>{topic}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+          {
+            mostIncorrectTopics.length > 0 ?               <div>
+            <p className='font-semibold text-gray-700 mb-2'>Mais erros em:</p>
+            <div className='bg-red-100 p-4 rounded-lg shadow-md'>
+              <ul className='list-disc pl-5 text-gray-800'>
+                {mostIncorrectTopics.map((topic, index) => (
+                  <li key={index}>{topic}</li>
+                ))}
+              </ul>
+            </div>
+          </div> : ""
+          }
             </div>
           </div> 
           </div>
