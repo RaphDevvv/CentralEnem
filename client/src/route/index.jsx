@@ -15,7 +15,7 @@ import Ranking from '../pages/Ranking';
 import Statas from '../pages/Stats';
 import Stats from '../pages/Stats';
 import IsAdmin from '../permissions/IsAdmin';
-import DiffUserProfile from '../pages/diffUserProfile';
+import DiffUserProfile from '../pages/DiffUserProfile';
 
 const router = createBrowserRouter([
   {
