@@ -13,10 +13,6 @@ const Header = () => {
     const [openMenu, setOpenMenu] = useState(false)
     const [openMobileMenu, setOpenMobileMenu] = useState(false)
 
-    useEffect(()=>{
-        
-    })
-
     return (
 
         <div className='sticky top-0 shadow-md h-24 bg-white max-w-[150rem] mx-auto z-50'>
