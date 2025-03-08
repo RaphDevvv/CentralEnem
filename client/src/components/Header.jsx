@@ -16,7 +16,7 @@ const Header = () => {
     return (
 
         <div className='sticky top-0 shadow-md h-24 bg-white max-w-[150rem] mx-auto z-50'>
-            <div className='flex justify-between items-center h-full md:mx-16 mx-5'>
+            <div className='flex md:flex justify-between items-center h-full md:mx-16 mx-5'>
                 <Link to={"/main/home"} className='flex gap-2 items-center justify-center cursor-pointer'>
                     <div className='h-10 w-10 bg-blue-500 p-2 rounded-full flex justify-center items-center '>
                         {/* Logo */}
